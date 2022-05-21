@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {{- block "title" . -}}
+        {{ .Site.Title }}
+      {{- end -}}
+    </title>
+
+    {{/* Some common tags */}}
+    <meta name="renderer" content="webkit"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:image" content="favicon.svg" />
+    <meta name="author" content="{{ .Site.Params.Author }}">
+    <meta property="og:url" content="{{ .Permalink }}" />
+    {{- block "meta" . -}}
+      <meta property="og:title" content="{{ .Title }} - {{ .Site.Title }}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:description" content="{{ .Description }}" />
+      <meta name="description" content="{{ .Description }}" />
+    {{- end -}}
+
+    {{- with resources.Get "css/mk2.sass" | toCSS | resources.PostCSS (dict "use" "autoprefixer") | resources.Minify -}}
+      <style>{{ .Content | safeCSS }}</style>
+    {{- end -}}
+
+    {{- block "stylesheet" . -}}
+    {{- end -}}
+
+    {{/* Preload commonly used fonts */}}
+    <link rel="preload" href="/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lora/Lora-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin />
+
+	{{- range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+	{{- end -}}
+  </head>
+
+  <body>
+    {{- block "main" . -}}
+    {{- end -}}
+  </body>
+
+  <div id="action-botton">
+    <div class="action-wrapper">
+	  <div class="action meter">
+	    <span id="progress_meter">JS</span>
+	  </div>
+	  <a href="#top" class="action up no-dot">
+        <svg xmlns='http://www.w3.org/2000/svg' class='icon' viewBox='0 0 512 512'><title>Arrow Up</title><path fill='none' stroke='currentColor' stroke-linecap='square' stroke-miterlimit='10' stroke-width='48' d='M112 244l144-144 144 144M256 120v292'/></svg>
+	  </a>
+    </div>
+  </div>
+
+  {{- with resources.Get "js/mk2.js" | resources.Minify -}}
+    <script>{{ .Content | safeJS }}</script>
+  {{- end -}}
+</html>

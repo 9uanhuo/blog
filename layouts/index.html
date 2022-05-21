@@ -1,0 +1,32 @@
+{{ define "meta" }}
+  <meta property="og:title" content="{{ .Site.Title }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{{ .Site.Params.Description | markdownify | plainify }}" />
+  <meta name="description" content="{{ .Site.Title }}" />
+{{ end }}
+
+{{ define "main" }}
+  <div id="center">
+    <header> 
+      <div id="nav" class="fat">
+        <div class="after">
+          {{ partial "slim-header.html" . }}
+        </div>
+      </div>
+      <div id="big-title">
+        <h1>{{ .Site.Title }}</h1>
+        <h2>{{ .Site.Params.Description | markdownify }}</h2>
+      </div>
+    </header>
+
+    <main>
+      <article style="min-height: 50vh">
+        {{ .Content }}
+      </article>
+    </main>
+
+    <div style="margin-top: auto">
+      {{ partial "footer" . }}
+    </div>
+  </div>
+{{ end }}

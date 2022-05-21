@@ -1,0 +1,57 @@
+{{ $caption := (.Get "caption") }}
+{{ $src := (.Get "src") }}
+
+{{ $Ext := (path.Ext $src) }}
+<figure>
+  <picture>
+    {{- $isJPG := eq $Ext ".jpg" -}}
+    {{- $isPNG := eq $Ext ".png" -}}
+
+    {{- if ($isJPG) -}}
+      {{- $avifPath:= replace $src ".jpg" ".avif" -}}
+      {{- $avifImage := resources.Get (printf "%s" $avifPath) -}}
+
+      {{- if $avifImage -}}
+        <source srcset="{{ $avifImage.Permalink }}" type="image/avif" >
+      {{- end }}
+
+      {{- $webpPath:= replace $src ".jpg" ".webp" -}}
+      {{- $webpImage := resources.Get (printf "%s" $webpPath) -}}
+
+      {{- if $webpImage -}}
+        <source srcset="{{ $webpImage.Permalink }}" type="image/webp" >
+      {{- end -}}
+    {{- end }}
+
+    {{ if ($isPNG) -}}
+      {{- $avifPath:= replace $src ".png" ".avif" -}}
+      {{- $avifImage := resources.Get (printf "%s" $avifPath) -}}
+
+      {{ if $avifImage -}}
+        <source srcset="{{ $avifImage.Permalink }}" type="image/avif" >
+      {{- end }}
+
+      {{ $webpPath:= replace $src ".png" ".webp" }}
+      {{- $webpImage := resources.Get (printf "%s" $webpPath) -}}
+
+      {{- if $webpImage -}}
+        <source srcset="{{ $webpImage.Permalink }}" type="image/webp" >
+      {{- end -}}
+    {{- end }}
+
+    {{- $image := resources.Get (printf "%s" $src) -}}
+    <img
+      src="{{ $image.Permalink }}"
+      alt="{{ $caption }}"
+      width="{{ $image.Width }}"
+      height="{{ $image.Height }}"
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+  {{- if $caption -}}
+  <figcaption>
+    {{ $caption }}
+  </figcaption>
+  {{- end -}}
+</figure>

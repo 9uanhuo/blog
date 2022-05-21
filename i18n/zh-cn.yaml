@@ -1,0 +1,33 @@
+# Site data
+date-format:
+  other: '2006-01-02'
+
+# slim-header
+posts:
+  other: '文章'
+tags:
+  other: '标签'
+about-me:
+  other: '关于'
+links:
+  other: '链接'
+
+# single.html
+back:
+  other: '返回主页'
+back-to-posts:
+  other: '更多文章'
+view-in-other-lang:
+  other: 'View English Version'
+tags:
+  other: '标签'
+published-on:
+  other: '发表于'
+last-modified-on:
+  other: 'Last modified on'
+other-articles-in-this-series:
+  other: '其他同系列的文章：'
+
+# footnote
+footnote-msg:
+  other: "© 2018-2022 Guan Huo. 更多信息请见 [[/about][关于]]."
