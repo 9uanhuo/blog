@@ -1,0 +1,52 @@
+#+TITLE: mpv播放器初步使用指南
+#+DATE: 2021-04-30T03:38:24
+#+TAGS[]: Media
+#+LICENSE: cc-sa
+#+TOC: true
+
+* 安装
+可以直接访问[[https://mpv.io/installation/][mpv官网]]下载二进制文件手动安装，也可以使用包管理器进行自动安装。
+
+Windows： ~Scoop~ 、 ~Chocolatey~
+
+macOS： ~Homebrew~
+
+Linux下可以使用各个发行版的包管理器进行安装
+
+* 文件说明
+Windows系统中，默认情况下，mpv会加载存放在 =%APPDATA%\mpv\mpv.conf= 的配置文件。
+
+当 =mpv.exe= 所在的目录下存在名为 =portable_config= 的文件夹时，所有的配置文件将从 =portable_config= 中加载。
+
++ =mpv.conf= : 用户配置文件
++ =input.conf= : 键盘快捷键
++ =fonts.conf= : 字体配置文件
++ =fonts= : 存放字幕需要使用的字体
++ =scrpits= : 存放用户外挂脚本
++ =scrpit-opts= : 存放外置脚本配置
+
+以上是mpv常用的一些文件与目录，具体说明可以去查阅[[https://mpv.io/manual/master/#files-on-windows][mpv手册]]。
+
+* 配置文件
+对于完全没有接触过mpv的用户，或者不想自行配置的用户，推荐(利益无关)：[[https://github.com/hooke007/MPV_lazy][hooke007/MPV_lazy]]
+
+[[https://github.com/hooke007][@hooke007]]的配置说明非常非常全面，大大降低了mpv的配置编辑门槛，结合[[https://mpv.io/manual/master/][mpv官方手册]]即可轻松得到符合自己需要的配置。
+
+* 用户脚本
+上面的配置中也包含了一部分的脚本，基本满足使用，用户可以根据自己的需要编写脚本或者使用已有的一些脚本。
+
+- [[https://github.com/mpv-player/mpv/wiki/User-Scripts][User Scripts]]
+- [[https://github.com/mpv-player/mpv/wiki/Language-bindings][Language bindings]]
+
+* 额外配置
+Windows 下，mpv 安装后并不会注册文件关联，需要进行手动注册，参见[[https://github.com/rossy/mpv-install][rossy/mpv-install]]。然后就可以从设置中设置默认的视频打开方式了。
+
+注意：在卸载 mpv 时，请注意运行相应的脚本清除文件关联。
+
+* 提示
+默认情况下，mpv在启动时会加载所有存放在 =fonts= 文件夹中的所有字体文件到内存，如果 =fonts= 中有很多字体，请考虑使用 =fonts.conf= 来选择性引入字体，这样可以提高内存效率。参见:
+
+- [[https://mpv.io/manual/master/#files-~/-config/mpv/fonts/]]
+- [[https://mpv.io/manual/master/#files-~/-config/mpv/fonts-conf]]
+- [[https://mpv.io/manual/master/#options-sub-font-provider]]
+- [[https://mpv.io/manual/master/#options-osd-font-provider]]
