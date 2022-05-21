@@ -1,0 +1,25 @@
+#+TITLE: Docker容器连接到本地MySQL数据库
+#+DATE: 2021-03-11T00:55:12
+#+TAGS[]: Docker
+#+LICENSE: cc-sa
+#+TOC: true
+
+#+BEGIN_QUOTE
+本文引自 [[https://stackoverflow.com/questions/55223576/docker-wordpress-connection-to-the-database-server-on-the-localhost][StackOverflow]]
+#+END_QUOTE
+
+首先，我们需要创建一个网络。假设你想把本地主机在新建的网络中的IP设置为 192.168.0.1 ，执行以下操作：
+
+#+BEGIN_SRC sh
+docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 dockernet
+#+END_SRC
+ 
+这样，我们创建了一个范围为 192.168.0.0/24 的子网，网关地址为 192.168.0.1 ，子网名为 dockernet ，这个网络桥接到了本地网络上，网关地址也就是这个子网中本机的地址。
+
+假设我们部署了如下容器：
+
+#+BEGIN_SRC sh
+docker run --name wordpress --net dockernet -p 8081:80 -d wordpress
+#+END_SRC
+
+指定 wordpress 容器使用 dockernet，这样容器就能够使用 192.168.0.1 作为本地地址来访问本地数据库等服务了。
