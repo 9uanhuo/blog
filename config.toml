@@ -1,0 +1,22 @@
+baseurl = "https://blog.ghuo.me"
+languageCode = "zh-cn"
+DefaultContentLanguage = "zh-cn"
+title = "Guan Huo's Notes"
+
+[markup]
+  [markup.highlight]
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+
+[params]
+  description = "*KEEP IT SIMPLE, STUPID.*"
+  author = "Guan Huo"
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
+
+[languages]
+  [languages.zh-cn]
+    weight = 2
