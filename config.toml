@@ -5,8 +5,8 @@ title = "Guan Huo's Notes"
 
 [markup]
   [markup.highlight]
-    lineNos = true
-    lineNumbersInTable = true
+    lineNos = false
+    lineNumbersInTable = false
     noClasses = false
 
 [params]
